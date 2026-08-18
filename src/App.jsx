@@ -15,20 +15,27 @@ import About from './components/About/About'
 import Profile from './components/Profile/Profile'
 function App() {
 
-  let route = createBrowserRouter([
+ let route = createBrowserRouter(
+  [
     {
-      path: '', element: <Layout />, children: [
-        { index: true, element: <SignIn></SignIn> },
-        { path: 'SignUp', element: <SignUp></SignUp> },
-        { path: 'SignIn', element: <SignIn></SignIn> },
-        {path:'About',element:<About></About>},
-        { path: 'Profile', element: <Profile></Profile> },
-        { path: 'index', element: <Index></Index> },
-        {path:'post/:id' , element : <Post></Post>},
-        { path: '*', element: <NotFound></NotFound> }
-      ]
-    }
-  ])
+      path: "/",
+      element: <Layout />,
+      children: [
+        { index: true, element: <SignIn /> },
+        { path: "SignUp", element: <SignUp /> },
+        { path: "SignIn", element: <SignIn /> },
+        { path: "About", element: <About /> },
+        { path: "Profile", element: <Profile /> },
+        { path: "index", element: <Index /> },
+        { path: "post/:id", element: <Post /> },
+        { path: "*", element: <NotFound /> },
+      ],
+    },
+  ],
+  {
+    basename: import.meta.env.PROD ? "/Social-App" : "/",
+  }
+);
   return <UserContextProvider>
     <RouterProvider router={route}></RouterProvider>
   </UserContextProvider>
