@@ -33,7 +33,7 @@ function App() {
     },
   ],
   {
-    basename: import.meta.env.PROD ? "/Social-App" : "/",
+    basename: import.meta.env.PROD ? "/Social-App/" : "/",
   }
 );
   return <UserContextProvider>
