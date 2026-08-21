@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import axios from 'axios'
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { UserContext } from '../../../Context/UserContext'
 import Styles from '../Create/Create.module.css'
 
@@ -15,9 +15,8 @@ const postSchema = z.object({
 export default function Edit() {
     const { User } = useContext(UserContext)
     const { id } = useParams()
-    const location = useLocation()
     const navigate = useNavigate()
-    const [post, setPost] = useState(location.state?.post || null)
+    const [post, setPost] = useState( null)
     const [apiError, setApiError] = useState('')
     const [isLoading, setIsLoading] = useState(!location.state?.post)
     const [isSaving, setIsSaving] = useState(false)
@@ -51,7 +50,7 @@ export default function Edit() {
         }
 
         getPost()
-    }, [id, post, reset, User.token])
+    }, [])
 
     async function updatePost(data) {
         setIsSaving(true)

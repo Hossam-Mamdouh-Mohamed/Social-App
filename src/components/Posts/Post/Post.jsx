@@ -15,6 +15,8 @@ export default function Post() {
     const [error, setError] = useState('');
     const [comment, setComment] = useState('');
     const [comments, setComments] = useState([]);
+    const [commentError, setCommentError] = useState('');
+    const [isSubmittingComment, setIsSubmittingComment] = useState(false);
 
     useEffect(() => {
         async function getPostDetails() {
@@ -49,29 +51,65 @@ export default function Post() {
     }
 
     async function handleAddComment() {
-        if (!comment.trim()) return;
+        const content = comment.trim();
+        if (!content || isSubmittingComment) return;
 
         try {
+            setCommentError('');
+            setIsSubmittingComment(true);
             const response = await axios.post(
                 `https://route-posts.routemisr.com/posts/${id}/comments`,
-                { content: comment },
+                { content },
                 {
                     headers: {
-                        Authorization: `Bearer ${token}`
+                        Authorization: `Bearer ${User.token}`
                     }
                 }
             );
-            console.log(response);
+            const newComment = response.data.data.comment || response.data.data;
+            setComments((currentComments) => [...currentComments, {
+                ...newComment,
+                content: newComment.content || content,
+                commentCreator: newComment.commentCreator || { name: User.user?.name || 'You' },
+                createdAt: newComment.createdAt || new Date().toISOString()
+            }]);
+            setPost((currentPost) => ({
+                ...currentPost,
+                commentsCount: (currentPost.commentsCount || 0) + 1
+            }));
+            setComment('');
         } catch (err) {
             console.error(err);
+            setCommentError('Could not add comment. Please try again.');
+        } finally {
+            setIsSubmittingComment(false);
         }
+    }
 
-        setComments([...comments, {
-            content: comment,
-            commentCreator: { name: 'You' },
-            createdAt: new Date().toISOString()
-        }]);
-        setComment('');
+    async function handleDeleteComment(commentId) {
+        if (!commentId) return;
+
+        try {
+            setCommentError('');
+            await axios.delete(
+                `https://route-posts.routemisr.com/posts/${id}/comments/${commentId}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${User.token}`
+                    }
+                }
+            );
+            setComments((currentComments) => currentComments.filter((currentComment) => (
+                (currentComment._id || currentComment.id) !== commentId
+            )));
+            setPost((currentPost) => ({
+                ...currentPost,
+                commentsCount: Math.max((currentPost.commentsCount || 1) - 1, 0)
+            }));
+        } catch (err) {
+            console.error(err);
+            setCommentError('Could not delete comment. Please try again.');
+        }
     }
 
     if (isLoading) return <div className={Styles.center}>Loading post...</div>;
@@ -126,8 +164,11 @@ export default function Post() {
                             placeholder="Write a comment..."
                             className={Styles.commentInput}
                         />
-                        <button onClick={handleAddComment} className={Styles.submitBtn}>Post Comment</button>
+                        <button onClick={handleAddComment} className={Styles.submitBtn} disabled={isSubmittingComment}>
+                            {isSubmittingComment ? 'Posting...' : 'Post Comment'}
+                        </button>
                     </div>
+                    {commentError && <p className={Styles.error}>{commentError}</p>}
 
                     <div className={Styles.commentsList}>
                         {(comments.length > 0 || post.topComment) && (
@@ -140,10 +181,19 @@ export default function Post() {
                                     </div>
                                 )}
                                 {comments.map((cmt, idx) => (
-                                    <div key={idx} className={Styles.comment}>
+                                    <div key={cmt._id || cmt.id || idx} className={Styles.comment}>
                                         <strong>{cmt.commentCreator.name}</strong>
                                         <p>{cmt.content}</p>
                                         <p className={Styles.commentDate}>{new Date(cmt.createdAt).toLocaleDateString()}</p>
+                                        {(cmt._id || cmt.id) && (
+                                            <button
+                                                type="button"
+                                                onClick={() => handleDeleteComment(cmt._id || cmt.id)}
+                                                className={Styles.deleteCommentBtn}
+                                            >
+                                                Delete
+                                            </button>
+                                        )}
                                     </div>
                                 ))}
                             </>

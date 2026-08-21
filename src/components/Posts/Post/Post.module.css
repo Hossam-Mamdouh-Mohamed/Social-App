@@ -139,6 +139,11 @@
     background: #1d4ed8;
 }
 
+.submitBtn:disabled {
+    background: #93c5fd;
+    cursor: not-allowed;
+}
+
 .commentsList {
     display: flex;
     flex-direction: column;
@@ -166,6 +171,14 @@
     font-size: 0.8rem;
     color: #9ca3af;
     margin-top: 0.5rem;
+}
+
+.deleteCommentBtn {
+    border: none;
+    background: transparent;
+    color: #dc2626;
+    padding: 0;
+    cursor: pointer;
 }
 
 .center {

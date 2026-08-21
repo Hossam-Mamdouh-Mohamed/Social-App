@@ -5,11 +5,14 @@ import { Navigate } from 'react-router-dom';
 
 export default function Auth(props) {
 
-    let {User} = useContext(UserContext);
+    let { User ,isAuthLoading} = useContext(UserContext);
+
+    if (isAuthLoading) {
+        return <div>Loading...</div>;
+    }
 
     if (User) {
         return props.children
-        
     }
     else
     {
