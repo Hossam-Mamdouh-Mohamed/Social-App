@@ -1,0 +1,143 @@
+.page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.formCard {
+    padding: 2rem;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 16px;
+    box-shadow: 0 16px 35px rgba(15, 23, 42, 0.1);
+}
+
+.heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+}
+
+.eyebrow {
+    margin: 0 0 0.35rem;
+    color: #0891b2;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.heading h1 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 2rem;
+}
+
+.cancelButton {
+    padding: 0.6rem 0.9rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    color: #475569;
+    text-decoration: none;
+}
+
+.cancelButton:hover {
+    border-color: #0891b2;
+    color: #0e7490;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+label {
+    margin-top: 0.75rem;
+    color: #334155;
+    font-weight: 700;
+}
+
+label span {
+    color: #94a3b8;
+    font-weight: 400;
+}
+
+.textarea,
+.input {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    background: #f8fafc;
+    color: #0f172a;
+    font: inherit;
+    outline: none;
+}
+
+.textarea {
+    min-height: 180px;
+    padding: 0.85rem;
+    resize: vertical;
+}
+
+.input {
+    padding: 0.8rem 0.85rem;
+}
+
+.textarea:focus,
+.input:focus {
+    border-color: #0891b2;
+    box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.14);
+}
+
+.fieldError,
+.error {
+    margin: 0;
+    color: #be123c;
+    font-size: 0.9rem;
+}
+
+.error {
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    background: #fff1f2;
+}
+
+.submitButton {
+    margin-top: 1rem;
+    padding: 0.85rem 1rem;
+    border: 0;
+    border-radius: 9px;
+    background: #0891b2;
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.submitButton:hover {
+    background: #0e7490;
+}
+
+.submitButton:disabled {
+    cursor: wait;
+    opacity: 0.65;
+}
+
+.hint {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+@media (max-width: 520px) {
+    .formCard {
+        padding: 1.25rem;
+    }
+
+    .heading h1 {
+        font-size: 1.6rem;
+    }
+}

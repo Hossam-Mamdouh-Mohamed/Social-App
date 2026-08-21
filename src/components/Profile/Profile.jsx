@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import axios from 'axios'
 import { set } from 'zod/v4'
+import { Link } from 'react-router-dom'
 
 const passwordSchema = z.object({
     currentPassword: z.string().min(1, "Current password is required"),
@@ -19,7 +20,7 @@ const passwordSchema = z.object({
 
 export default function Profile() {
 
-    let { User,SetUser } = useContext(UserContext);
+    let { User, SetUser } = useContext(UserContext);
     let [isEditingPassword, setIsEditingPassword] = useState(false);
     let [apiMessage, setApiMessage] = useState('');
     let [apiError, setApiError] = useState('');
@@ -59,7 +60,7 @@ export default function Profile() {
             reset();
             setIsEditingPassword(false);
             SetUser(null);
-            
+
         } catch (error) {
             setIsLoading(false);
             setApiError(error.response?.data?.message || 'Failed to change password');
@@ -75,13 +76,16 @@ export default function Profile() {
     return (
         <div className="flex items-center justify-center min-h-screen  dark:bg-gray-900 py-12 px-4">
             <div className="w-full max-w-2xl">
+                <Link to="/home"  className={Styles.backButton}>
+                    Back
+                </Link>
                 <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-6">
                     <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white">My Profile</h2>
-                    
+
                     <div className="flex items-center gap-6 mb-8">
-                        <img 
-                            src={User?.user?.photo} 
-                            alt="Profile" 
+                        <img
+                            src={User?.user?.photo}
+                            alt="Profile"
                             className="w-24 h-24 rounded-full object-cover border-4 border-blue-500"
                         />
                         <div className="flex-1">

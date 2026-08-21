@@ -9,17 +9,16 @@ import { UserContext } from '../../Context/UserContext';
 
 const formSchema = z.object({
     email: z.string().trim().email("Invalid email address"),
-    password: z.string().trim().min(1, "Enter Password").regex(
-    /^(?=.*?[A-Z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-    "Password must contain 8+ characters, uppercase, lowercase, number, and special character"
-  ),
+    password: z.string().trim().min(1, "Enter Password").regex(/^(?=.*?[A-Z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+        "Password must contain 8+ characters, uppercase, lowercase, number, and special character"
+    ),
 });
 
 
 export default function SignIn() {
 
     let navigate = useNavigate();
-    let {SetUser} = useContext(UserContext);
+    let { SetUser } = useContext(UserContext);
 
     let { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
@@ -35,16 +34,15 @@ export default function SignIn() {
     let [isLoading, setIsLoading] = useState(false);
 
     async function handleLogin(User) {
+
         setIsLoading(true);
         axios.post('https://route-posts.routemisr.com/users/signin', User)
             .then((ApiResponse) => {
                 setIsLoading(false);
-                // Store both token and user data
-                localStorage.setItem('UserToken', ApiResponse.data.data.token);
                 localStorage.setItem('UserData', JSON.stringify(ApiResponse.data.data));
                 SetUser(ApiResponse.data.data);
-                navigate('/index');
-                
+                navigate('/home');
+
             }).catch((ApiResponse) => {
                 setIsLoading(false);
                 setApiError(ApiResponse.response.data.message);

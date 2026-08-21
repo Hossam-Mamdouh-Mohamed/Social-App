@@ -17,8 +17,10 @@
     "generate-react-cli": "^11.0.5",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-helmet": "^6.1.0",
     "react-hook-form": "^7.85.0",
     "react-router-dom": "^7.18.2",
+    "react-use": "^17.6.1",
     "tailwindcss": "^4.3.3",
     "zod": "^3.25.76"
   },

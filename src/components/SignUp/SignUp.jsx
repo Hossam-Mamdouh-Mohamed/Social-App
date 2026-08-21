@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod";
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../Context/UserContext';
 
 
 const formSchema = z.object({
@@ -32,6 +33,7 @@ const formSchema = z.object({
 export default function SignUp() {
 
     let navigate= useNavigate();
+    let {SetUser} =useContext(UserContext);
     let { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
             name: "",
@@ -51,13 +53,13 @@ export default function SignUp() {
     let [isLoading, setIsLoading] = useState(false);
 
     async function CreateAccount(User) {
-        console.log(User)
         setIsLoading(true);
         axios.post('https://route-posts.routemisr.com/users/signup', User)
             .then((ApiResponse) => {
-                
+                localStorage.setItem('UserData', JSON.stringify(ApiResponse.data.data));
+                SetUser(ApiResponse.data.data);
                 setIsLoading(false);
-                navigate('/index')
+                navigate('/home')
             }).catch((ApiResponse) => {
                 setIsLoading(false);
                 setApiError(ApiResponse.response.data.message);

@@ -9,11 +9,11 @@ export default function Layout() {
     const [counter,setcounter]=useState(0);
     useEffect(() => {}, [])
 
-        return <>
+        return <div className={Styles.Layout}>
         <Navbar />
         <main className={Styles.main}>
             <Outlet />
         </main>
         <Footer />
-        </>
+        </div>
 }

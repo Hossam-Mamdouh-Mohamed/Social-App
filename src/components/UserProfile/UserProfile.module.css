@@ -1,0 +1,119 @@
+.page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.backButton {
+    border: 0;
+    background: transparent;
+    color: #0891b2;
+    cursor: pointer;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.profileCard {
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 18px;
+    box-shadow: 0 16px 35px rgba(15, 23, 42, 0.12);
+}
+
+.cover {
+    height: 150px;
+    background: linear-gradient(120deg, #0f172a, #155e75);
+}
+
+.profileBody {
+    position: relative;
+    padding: 0 2rem 2rem;
+    text-align: center;
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    margin-top: -60px;
+    border: 5px solid #ffffff;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #e2e8f0;
+}
+
+.profileBody h1 {
+    margin: 1rem 0 0.25rem;
+    color: #0f172a;
+    font-size: 1.8rem;
+}
+
+.username,
+.email {
+    margin: 0.25rem 0;
+    color: #64748b;
+}
+
+.infoGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+    text-align: left;
+}
+
+.infoGrid div {
+    padding: 1rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+}
+
+.infoGrid span,
+.infoGrid strong {
+    display: block;
+}
+
+.infoGrid span {
+    margin-bottom: 0.35rem;
+    color: #64748b;
+    font-size: 0.8rem;
+}
+
+.infoGrid strong {
+    color: #0f172a;
+}
+
+.postsButton {
+    display: inline-block;
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    background: #0891b2;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.postsButton:hover {
+    background: #0e7490;
+}
+
+.state,
+.stateError {
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
+.stateError {
+    color: #be123c;
+}
+
+@media (max-width: 520px) {
+    .profileBody {
+        padding: 0 1rem 1.5rem;
+    }
+
+    .infoGrid {
+        grid-template-columns: 1fr;
+    }
+}

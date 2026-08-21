@@ -5,6 +5,10 @@
 }
 
 .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
     margin-bottom: 1.5rem;
 }
 
@@ -146,4 +150,64 @@
 .stateError {
     background: #fef2f2;
     color: #b91c1c;
+}
+
+.stateSuccess {
+    margin-bottom: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.authorLink,
+.bodyLink {
+    color: inherit;
+    text-decoration: none;
+}
+
+.authorLink:hover h3 {
+    color: #0891b2;
+}
+
+.bodyLink {
+    display: block;
+}
+
+.createPostButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex-shrink: 0;
+    padding: 0.7rem 1rem;
+    border-radius: 9px;
+    background: #0891b2;
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 8px 16px rgba(8, 145, 178, 0.2);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.createPostButton span {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+.createPostButton:hover {
+    background: #0e7490;
+    box-shadow: 0 10px 20px rgba(8, 145, 178, 0.28);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 520px) {
+    .header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .createPostButton {
+        width: 100%;
+        justify-content: center;
+    }
 }

@@ -177,3 +177,13 @@
     color: #dc2626;
     margin-bottom: 1rem;
 }
+
+.authorLink {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.authorLink:hover h3 {
+    color: #0891b2;
+}

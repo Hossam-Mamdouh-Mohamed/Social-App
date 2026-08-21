@@ -3,7 +3,7 @@ import Styles from './Footer.module.css'
 
 export default function Footer() {
 
-    return <footer className="bg-black text-white text-center py-3 mt-auto">
+    return <footer className="bg-slate-950 text-slate-300 text-center py-3 mt-auto border-t border-slate-700">
         <div className="container">
             <p className="mb-0">
                 © {new Date().getFullYear()} My React App. All rights reserved.
